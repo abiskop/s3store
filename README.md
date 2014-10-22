@@ -1,5 +1,5 @@
 
-#S3store
+#s3store
 [![Build Status](https://travis-ci.org/mirkokiefer/s3store.png?branch=master)](https://travis-ci.org/mirkokiefer/s3store)
 
 Use AWS S3 as a database for objects.
