@@ -1,6 +1,6 @@
 {
   "name": "s3store",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Use S3 as a simple object database",
   "homepage": "https://github.com/mirkokiefer/s3store",
   "main": "index.js",
