@@ -1,0 +1,23 @@
+{
+  "name": "s3store",
+  "version": "0.0.2",
+  "description": "Use S3 as a simple object database",
+  "homepage": "https://github.com/mirkokiefer/s3store",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "s3",
+    "aws"
+  ],
+  "author": "Mirko Kiefer <mail@mirkokiefer.com>",
+  "license": "BSD",
+  "dependencies": {
+    "knox": "^0.9.1"
+  },
+  "devDependencies": {
+    "mocha": "^2.0.0",
+    "node-uuid": "^1.4.1"
+  }
+}
