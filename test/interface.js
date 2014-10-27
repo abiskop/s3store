@@ -44,6 +44,14 @@ function runTest(store) {
         done();
       });
     });
+    it('should fail reading object1', function (done) {
+      store.readObject(key1, function (err, obj) {
+        assert.ok(err);
+        assert.equal(err.statusCode, 404);
+        assert.ok(err.message);
+        done();
+      });
+    });
     it('should delete object2', function (done) {
       store.deleteObject(key2, done);
     });

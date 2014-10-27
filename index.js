@@ -23,7 +23,7 @@ function createS3Store(options) {
     });
     req.on('response', function (res) {
       if (res.statusCode !== 200) {
-        return cb(new Error('bad S3 status ' + res.statusCode));
+        return forwardS3Error(res, cb);
       }
       cb();
     });
@@ -34,7 +34,7 @@ function createS3Store(options) {
     var s3Key = createS3Key(key);
     client.get(s3Key).on('response', function (res) {
       if (res.statusCode !== 200) {
-        return cb(new Error('bad S3 status ' + res.statusCode));
+        return forwardS3Error(res, cb);
       }
       res.setEncoding('utf8');
       var data = '';
@@ -52,7 +52,7 @@ function createS3Store(options) {
     var s3Key = createS3Key(key);
     client.del(s3Key).on('response', function (res) {
       if (res.statusCode !== 204) {
-        return cb(new Error('bad S3 status ' + res.statusCode));
+        return forwardS3Error(res, cb);
       }
       cb();
     }).end();
@@ -74,4 +74,16 @@ function createS3Store(options) {
   function createS3Key(key) {
     return namespace + '/' + key;
   }
+}
+
+function forwardS3Error(s3Res, cb) {
+  var body = '';
+  s3Res.on('data', function (data) {
+    body += data;
+  });
+  s3Res.on('end', function () {
+    var error = new Error(body);
+    error.statusCode = s3Res.statusCode;
+    cb(error);
+  });
 }
