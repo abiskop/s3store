@@ -67,7 +67,11 @@ function createS3Store(options) {
         var key = s3Key.slice(prefix.length);
         return key;
       });
-      cb(null, keys);
+      // *sometimes* S3 returns the prefix itself as a key
+      var nonEmptyKeys = keys.filter(function (each) {
+        return each !== '';
+      });
+      cb(null, nonEmptyKeys);
     });
   }
 
