@@ -18,7 +18,7 @@ function createS3Store(options) {
     var data = JSON.stringify(object);
     var s3Key = createS3Key(key);
     var req = client.put(s3Key, {
-      'Content-Length': data.length,
+      'Content-Length': new Buffer(data).length,
       'Content-Type': 'application/json'
     });
     req.on('response', function (res) {
